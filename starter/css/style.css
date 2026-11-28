@@ -9,43 +9,438 @@
 /* ---------- PART 4: Custom properties (colours, radius) ---------- */
 :root {
   /* e.g. --brown: #6b3e26; */
+   /* Main café colours */
+  --brown: #6b3e26;
+  --brown-dark: #422719;
+  --cream: rgb(253 246 236);
+  --gold: hsl(42 86% 63%);
+  --text: #333333;
+
+  /* Rounded corners */
+  --radius: 10px;
 }
 
 /* ---------- PART 5: Box model reset ---------- */
+/* Makes width and height include padding and borders */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
 
-/* ---------- PART 4: Typography & colour (body, headings, links) ---------- */
+/* ---------- PART 4: Typography & colour (body, headings,
+ links) ---------- */
+/* Sets the general font, spacing and colours */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background-color: var(--cream);
+}
 
+/* Gives all headings a consistent café appearance */
+h1,
+h2,
+h3 {
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--brown);
+}
+
+/* Makes the main heading larger and centred */
+h2 {
+  font-size: 2rem;
+  text-align: center;
+}
+
+/* Adds a decorative gold line below headings */
+h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  background-color: var(--gold);
+  margin: 0.5rem auto;
+}
+
+/* Keeps images within their containers */
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Styles ordinary links */
+a:link {
+  color: var(--brown);
+}
+
+a:visited {
+  color: var(--brown-dark);
+}
+
+a:hover {
+  color: #a65c20;
+}
+
+/* Makes keyboard navigation visible */
+a:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* Changes link colour when clicked */
+a:active {
+  color: #c0392b;
+}
 
 /* ---------- PART 7 & 9: Header (flexbox + sticky) ---------- */
+/* Makes the header a flexible, sticky navigation bar */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 2rem;
+  background-color: var(--brown);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
+/* Keep the cafe logo image and text aligned horizontally*/
+.logo {
+  display:flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
 
 /* ---------- PART 6 & 7: Navigation list ---------- */
+.nav-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap:1 rem;
+  margin:0;
+  padding:0;
+}
 
+/* Styles navigation links as rounded buttons */
+.nav-list a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.6rem 1rem;
+  border-radius: 999px;
+}
+
+/* Keeps navigation links white when visited */
+.nav-list a:link,
+.nav-list a:visited {
+  color: white;
+}
+
+/* Highlights navigation links with gold on hover */
+.nav-list a:hover {
+  background-color: var(--gold);
+  color: var(--brown-dark);
+}
 
 /* ---------- Hero & buttons ---------- */
+/* Centres the hero content and creates a welcoming background */
+.hero {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: linear-gradient(
+    135deg,
+    var(--brown),
+    var(--brown-dark)
+  );
+  color: white;
+}
+
+/* Makes the hero heading stand out against the dark background */
+.hero h1 {
+  color: white;
+  font-size: 2.5rem;
+}
+
+/* Giving the tagline a comfortable width */
+.tagline {
+  max-width: 650px;
+  margin: 1rem auto 2rem;
+}
+
+/* Gives buttons a consistent appearance */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Styles the primary button in gold */
+.btn-primary {
+  background-color: var(--gold);
+  color: var(--brown-dark);
+}
+
+/* Changes the primary button appearance on hover */
+.btn-primary:hover {
+  background-color: white;
+  color: var(--brown-dark);
+}
 
 
 /* ---------- Main sections ---------- */
+/* Limits section width and centres content on the page */
+main > section {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+}
 
 
 /* ---------- PART 8: Cards (grid) ---------- */
-
+/* Arranges the café cards in a responsive grid */
+.card-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
 
 /* ---------- PART 5 & 9: Card box model + badge ---------- */
+/* Gives every card a consistent appearance and vertical layout */
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  position: relative;
+}
 
+/* Keeps card images at a consistent size */
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+}
+
+/* Pushes prices to the bottom of cards */
+.card .price {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-weight: bold;
+  color: var(--brown);
+}
+
+/* Positions the NEW badge relative to its card */
+.badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #c0392b;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  transform: rotate(8deg);
+}
 
 /* ---------- PART 6: Menu table ---------- */
+/* Makes the menu table fill its available width */
+.menu-table {
+  width: 100%;
+  border-collapse: collapse;
+}
 
+/* Adds comfortable spacing inside table cells */
+.menu-table th,
+.menu-table td {
+  padding: 0.85rem;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Gives the table heading a dark café background */
+.menu-table thead {
+  background-color: var(--brown-dark);
+  color: white;
+}
+
+/* Makes alternating menu rows easier to read */
+.menu-table tbody tr:nth-child(even) {
+  background-color: #f0e6da;
+}
+
+/* Highlights a menu row when the mouse moves over it */
+.menu-table tbody tr:hover {
+  background-color: #f5dfb6;
+}
+
+/* Makes menu item names bold */
+.menu-table tbody td:first-child {
+  font-weight: bold;
+}
+
+/* Aligns prices to the right */
+.menu-table tbody td:last-child {
+  text-align: right;
+}
+
+/* Places the table caption underneath the table */
+.menu-table caption {
+  caption-side: bottom;
+  font-style: italic;
+  padding: 0.75rem;
+}
 
 /* ---------- PART 6: Lists ---------- */
+/* Displays event numbers using uppercase Roman numerals */
+.event-list {
+  list-style-type: upper-roman;
+}
 
+/* Colours and bolds the event list markers */
+.event-list li::marker {
+  color: var(--brown);
+  font-weight: bold;
+}
+
+/* Displays square feature list bullets inside the list */
+.feature-list {
+  list-style-type: square;
+  list-style-position: inside;
+}
+
+/* Separates subsequent feature items with dashed lines */
+.feature-list li + li {
+  border-top: 1px dashed #c5a98b;
+  padding-top: 0.5rem;
+}
 
 /* ---------- PART 8: Booking form (grid) ---------- */
+/* Creates a centred two-column booking form */
+.booking-form {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: white;
+  border-radius: var(--radius);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
 
+/* Aligns form labels in the first column */
+.booking-form label {
+  grid-column: 1 / 2;
+  text-align: right;
+  align-self: center;
+}
+
+/* Places form controls in the second column */
+.booking-form input,
+.booking-form textarea,
+.booking-form button {
+  grid-column: 2 / 3;
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font: inherit;
+}
+
+/* Gives the email field a different background */
+.booking-form input[type="email"] {
+  background-color: #fff8e8;
+}
+
+/* Highlights form controls when selected */
+.booking-form input:focus,
+.booking-form textarea:focus {
+  outline: 2px solid var(--gold);
+  border-color: var(--brown);
+}
+
+/* Gives the booking button a pointer cursor */
+.booking-form button {
+  cursor: pointer;
+}
 
 /* ---------- Footer ---------- */
+/* Creates a dark footer with centred white text */
+.site-footer {
+  background-color: var(--brown-dark);
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+}
 
+/* Removes unnecessary paragraph spacing in the footer */
+.site-footer p {
+  margin: 0.4rem;
+}
 
 /* ---------- PART 10: Responsive design ---------- */
 /* @media (max-width: 640px) { ... } */
+/* Adapts the café website to screens 640px wide or smaller */
+@media (max-width: 640px) {
+
+  /* Makes the header static and stacks its contents */
+  .site-header {
+    position: static;
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  /* Centres navigation links and allows them to wrap */
+  .nav-list {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Reduces the hero spacing on small screens */
+  .hero {
+    padding: 3rem 1rem;
+  }
+
+  /* Changes the booking form to one column */
+  .booking-form {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+
+  /* Aligns labels to the left */
+  .booking-form label {
+    grid-column: 1 / -1;
+    text-align: left;
+  }
+
+  /* Makes controls fill the single form column */
+  .booking-form input,
+  .booking-form textarea,
+  .booking-form button {
+    grid-column: 1 / -1;
+  }
+
+  /* Hides the Description column on small screens */
+  .menu-table th:nth-child(2),
+  .menu-table td:nth-child(2) {
+    display: none;
+  }
+}
